@@ -1,0 +1,24 @@
+ {
+    "movies": [
+        {
+            "imdbRating": "8.2",
+            "imdbVotes": "1,200,605",
+            "language": "English, Urdu, Mandarin",
+            "plot": "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZmUwNGU2ZmItMmRiNC00MjhlLTg5YWUtODMyNzkxODYzMmZlXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg",
+            "summary_short": "N/A",
+            "title": "Batman Begins",
+            "year": "2005"
+        },
+        {
+            "imdbRating": "8.2",
+            "imdbVotes": "1,200,605",
+            "language": "English, Urdu, Mandarin",
+            "plot": "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption.",
+            "poster": "https://m.media-amazon.com/images/M/MV5BZmUwNGU2ZmItMmRiNC00MjhlLTg5YWUtODMyNzkxODYzMmZlXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg",
+            "summary_short": "N/A",
+            "title": "Batman Begins",
+            "year": "2005"
+        }
+    ]
+}

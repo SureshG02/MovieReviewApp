@@ -23,11 +23,11 @@ describe('>>>MovieResults --- REACT-REDUX (Shallow + passing the {store} directl
         ).dive()  
     })
 
-    it('+++ render the DUMB component', () => {
+    it('Render the DUMB component', () => {
         expect(wrapper.length).toEqual(1)
      });
 
-    it('has access to `movies` state', () => {
+    it('Has access to `movies` state', () => {
         expect(wrapper.props().movies).toBe(testData.movies);
     });
 });
@@ -44,18 +44,15 @@ describe('>>>H O M E --- REACT-REDUX (Mount + wrapping in <Provider>)',()=>{
         )
     })
 
-    it('+++ render the connected(SMART) component', () => {
+    it('Render the connected(SMART) component', () => {
        expect(wrapper.find(ConnectedMovieResults).length).toEqual(1)
     });
 
-    it('+++ check Prop matches with state', () => {
+    it('Check Prop matches with state', () => {
        expect(wrapper.find(MovieResults).prop('movies')).toEqual(state.movies)
     });
 
-    it('+++ check action on dispatching ', () => {
-        let action;
-        action = store.dispatch(movies(testData.movies))
-        expect(action.type).toBe("MOVIES")
+    it('Check MovieItem count is same as input test data', () => {
+        expect(wrapper.find('MovieItem')).toHaveLength(3);
     });
-
 });

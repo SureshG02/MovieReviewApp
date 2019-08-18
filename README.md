@@ -9,6 +9,7 @@ This will start spring boot backend application at 1035 port number.
 
 
 Start front end application:
+
 Prerequisite: npm 6 or higher version
 
 Go to movie-review-frontend folder and run npm install. After successful installation run below commands:

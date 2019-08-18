@@ -13,5 +13,7 @@ Start front end application:
 Prerequisite: npm 6 or higher version
 
 Go to movie-review-frontend folder and run npm install. After successful installation run below commands:
+
 npm test: Run test cases
+
 npm start: Start react UI at 3000 port.

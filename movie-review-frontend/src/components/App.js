@@ -14,23 +14,23 @@ class App extends Component {
   render() {
     return (
       <div className="row text-center">
-      <Container>
+        <Container>
           <Jumbotron fluid>
             <h2>Movies App</h2>
             <p> Any good movie is filled with secrets. </p>
             <b> Rich Moore </b>
           </Jumbotron>
           <br />
-        <Row>
-          <Col>
-          <Router>
-            <Switch>
-              <Route exact path='/' component={MovieResults} />
-            </Switch>
-          </Router>
-          </Col>
-        </Row>
-      </Container>
+          <Row>
+            <Col>
+              <Router>
+                <Switch>
+                  <Route exact path='/' component={MovieResults} />
+                </Switch>
+              </Router>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }

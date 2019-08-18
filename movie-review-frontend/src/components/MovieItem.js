@@ -19,8 +19,8 @@ export class MovieItem extends Component {
 	render() {
 		return (
 			<div className="thumbnail">
-				<Card style={{ width: '18rem'}}>
-				  <Card.Img variant="top" src={this.props.movie.poster} onError={e => {
+				<Card style={{ width: '18rem' }}>
+					<Card.Img variant="top" src={this.props.movie.poster} onError={e => {
 						if (this.state.imageLoadError) {
 							this.setState({
 								imageLoadError: false

@@ -73,6 +73,8 @@ export class Search extends Component {
 
 	render() {
 		const { pageRange, pageCounter, isFirstLoad, totalPageNumber, activePage, query } = this.state
+
+		/* Show loading icon when till data is fetched.*/
 		if (this.state.loading) {
 			return (
 				<Spinner animation="border" role="status" >
@@ -80,6 +82,9 @@ export class Search extends Component {
 				</Spinner>
 			)
 		}
+
+		/* Custom pagination logic to show number of pages based on totalPageNumber received from backend. Note here 
+		each click on pagination button makes call to backend.*/
 		const pageNumbers = [];
 		let start, end, prevDisable, nextDisable, hideNav;
 		if (pageCounter === Math.ceil(totalPageNumber / pageRange)) {
@@ -141,14 +146,14 @@ export class Search extends Component {
 					</Modal.Footer>
 				</Modal>
 				<br />
-				<div style={{display: 'flex',  justifyContent:'center', alignItems:'center'}} >
+				<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} >
 					<ButtonToolbar aria-label="Toolbar with button groups"  >
 						<ButtonGroup className="mr-2" aria-label="First group">
 							<Button variant="success" type="button" key={start} id={start} disabled={prevDisable} hidden={hideNav || isFirstLoad} onClick={(event) => this.prevClick(event)}>
 								{"prev"}
 							</Button>
 							{renderPagination}
-							<Button variant="success" type="button" key={end } id={end} disabled={nextDisable} hidden={hideNav || isFirstLoad} onClick={(event) => this.nextClick(event)}>
+							<Button variant="success" type="button" key={end} id={end} disabled={nextDisable} hidden={hideNav || isFirstLoad} onClick={(event) => this.nextClick(event)}>
 								{"next"}
 							</Button>
 						</ButtonGroup>

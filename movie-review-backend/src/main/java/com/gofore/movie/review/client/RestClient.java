@@ -45,6 +45,7 @@ public class RestClient {
 			} else {
 				omdbUrlByS = omdbUrl + "/?s=" + movieSearch + "&apikey=" + omdbUrlApikey;
 			}
+			
 			MovieReviewOmdbByS movieReviewOmdbByS = restTemplate.getForEntity(omdbUrlByS, MovieReviewOmdbByS.class)
 					.getBody();
 			if (movieReviewOmdbByS.isResponse()) {
@@ -53,7 +54,7 @@ public class RestClient {
 					Search search = iter.next();
 					MovieSummary summary = new MovieSummary();
 					MovieReviewOmdbByT movieReviewByT = restTemplate
-							.getForEntity("http://www.omdbapi.com/?" + "apikey=e7dab2c4" + "&t=" + search.getTitle(),
+							.getForEntity(omdbUrl + "/?" + search.getTitle() + "&apikey=" + omdbUrlApikey,
 									MovieReviewOmdbByT.class)
 							.getBody();
 					summary.setTitle(movieReviewByT.getTitle());
@@ -63,6 +64,8 @@ public class RestClient {
 					summary.setImdbRating(movieReviewByT.getImdbRating());
 					summary.setImdbVotes(movieReviewByT.getImdbVotes());
 					summary.setLanguage(movieReviewByT.getLanguage());
+					
+					//Fetch summary_short from Nyt api for each movie title.
 					MovieReviewNyt movieReviewNyt = restTemplate
 							.getForEntity(nytUrl + "api-key=" + nytUrlApikey + "&query=" + search.getTitle(),
 									MovieReviewNyt.class)

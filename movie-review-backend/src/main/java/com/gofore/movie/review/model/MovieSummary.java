@@ -1,13 +1,16 @@
 package com.gofore.movie.review.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MovieSummary {
-	
-	
 	private String title;
 	private String poster;
 	
@@ -20,5 +23,4 @@ public class MovieSummary {
 	
 	//summary_short from NYT.
 	private String summary_short;
-
 }

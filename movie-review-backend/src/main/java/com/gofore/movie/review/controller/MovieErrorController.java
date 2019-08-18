@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MovieErrorController implements ErrorController  {
  
+	/**
+	 * Custom error handling for controller.
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/error")
 	public String handleError(HttpServletRequest request) {
 	    Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);

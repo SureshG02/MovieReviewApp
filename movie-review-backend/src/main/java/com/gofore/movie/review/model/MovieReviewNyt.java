@@ -6,6 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * Model to map response coming from nytimes api.
+ * @author sugupta
+ *
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -23,6 +23,13 @@ public class MovieController {
 	
 	List<MovieResponse> list = new ArrayList<MovieResponse>();
 	
+	/**
+	 * 
+	 * @param movieSearch
+	 * @param page
+	 * @return ResponseEntity<MovieResponse>
+	 * @throws InterruptedException
+	 */
 	@RequestMapping(value = {"/movie/review/", "/movie/review"}, method = RequestMethod.GET)
 	public ResponseEntity<MovieResponse>  movieReviewList(@RequestParam(name = "title") String movieSearch,
 			@RequestParam(name = "page", required = false) Integer page) throws InterruptedException {

@@ -34,7 +34,14 @@ public class RestClient {
 	
 	@Value("${nyt.apikey}")
 	private String nytUrlApikey;
-
+	
+	/**
+	 * Fetches movie review data from OMDB API and NYT API for each movie title and returns MovieResponse.
+	 * @param movieSearch
+	 * @param page
+	 * @return MovieResponse
+	 * @throws InterruptedException
+	 */
 	public MovieResponse generateMovieSummary(String movieSearch, Integer page) throws InterruptedException {
 		List<MovieSummary> summaryList = new ArrayList<MovieSummary>();
 		MovieResponse response = new MovieResponse();
@@ -54,7 +61,7 @@ public class RestClient {
 					Search search = iter.next();
 					MovieSummary summary = new MovieSummary();
 					MovieReviewOmdbByT movieReviewByT = restTemplate
-							.getForEntity(omdbUrl + "/?" + search.getTitle() + "&apikey=" + omdbUrlApikey,
+							.getForEntity(omdbUrl + "/?t=" + search.getTitle() + "&apikey=" + omdbUrlApikey,
 									MovieReviewOmdbByT.class)
 							.getBody();
 					summary.setTitle(movieReviewByT.getTitle());

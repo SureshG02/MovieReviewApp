@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Model maps to all required fields to show on UI.
+ * @author sugupta
+ *
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

@@ -7,6 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+
+/**
+ * Model to map response coming from omdb api with search parameter.
+ * @author sugupta
+ *
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

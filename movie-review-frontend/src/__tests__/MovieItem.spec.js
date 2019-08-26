@@ -5,17 +5,13 @@ import renderer from 'react-test-renderer';
 import MovieItem from '../components/MovieItem';
 import {Provider} from 'react-redux';
 import { testStore } from '../utils/testUtils';
-import testData from './movietestdata.json';
+import { testData } from '../testData/moviestestdata';
 import { movies } from '../actions';
 
 configure({ adapter: new Adapter() });
 
-
-//*******************************************************************************************************
-describe('>>>Search --- REACT-REDUX (Mount + wrapping in <Provider>',()=>{
+describe('MovieItem component test',()=>{
     let wrapper;
-    const state = { movies: testData.movies };
-    const store = testStore(state);
     const movie = {
         "title": "Batman v Superman: Dawn of Justice",
         "poster": "https://m.media-amazon.com/images/M/MV5BYThjYzcyYzItNTVjNy00NDk0LTgwMWQtYjMwNmNlNWJhMzMyXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",

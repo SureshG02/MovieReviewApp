@@ -3,9 +3,13 @@ package com.gofore.movie.review.client;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,6 +24,8 @@ import com.gofore.movie.review.model.Search;
 @Component("restClient")
 public class RestClient {
 
+	private static final Logger logger = LoggerFactory.getLogger(RestClient.class);
+	
 	@Autowired
 	private RestTemplate restTemplate;
 
@@ -60,33 +66,12 @@ public class RestClient {
 				while (iter.hasNext()) {
 					Search search = iter.next();
 					MovieSummary summary = new MovieSummary();
-					MovieReviewOmdbByT movieReviewByT = restTemplate
-							.getForEntity(omdbUrl + "/?t=" + search.getTitle() + "&apikey=" + omdbUrlApikey,
-									MovieReviewOmdbByT.class)
-							.getBody();
-					summary.setTitle(movieReviewByT.getTitle());
-					summary.setPlot(movieReviewByT.getPlot());
-					summary.setPoster(movieReviewByT.getPoster());
-					summary.setYear(movieReviewByT.getYear());
-					summary.setImdbRating(movieReviewByT.getImdbRating());
-					summary.setImdbVotes(movieReviewByT.getImdbVotes());
-					summary.setLanguage(movieReviewByT.getLanguage());
-					
-					//Fetch summary_short from Nyt api for each movie title.
-					MovieReviewNyt movieReviewNyt = restTemplate
-							.getForEntity(nytUrl + "api-key=" + nytUrlApikey + "&query=" + search.getTitle(),
-									MovieReviewNyt.class)
-							.getBody();
-					if(movieReviewNyt.getNum_results() == 0) {
-						summary.setSummary_short("N/A");
-					}
-					Iterator<Results> iterNyt = movieReviewNyt.getResults().iterator();
-					while (iterNyt.hasNext()) {
-						Results result = iterNyt.next();
-						if (result.getDisplay_title().equalsIgnoreCase(search.getTitle())) {
-							summary.setSummary_short(result.getSummary_short());
-						}
-					}
+					//Async call to omdb api
+					CompletableFuture<MovieSummary> omdb = setMovieReviewsFromOmdb(search.getTitle(), summary);
+					//Async call to nyt api
+					CompletableFuture<MovieSummary> nyt = setSummaryShortFromNyt(search.getTitle(), summary);
+					//Wait till above 2 apis complete their job.
+ 					CompletableFuture.allOf(omdb, nyt).join();			
 					summaryList.add(summary);
 				}
 				response.setMovieSummaryList(summaryList);
@@ -99,5 +84,42 @@ public class RestClient {
 			response.setError(e.getMessage());
 		}
 		return response;
+	}
+	
+	@Async
+	private CompletableFuture<MovieSummary> setMovieReviewsFromOmdb(String title, MovieSummary summary) {
+		//logger.info("setMovieReviewsFromOmdb");
+		MovieReviewOmdbByT movieReviewByT = restTemplate
+				.getForEntity(omdbUrl + "/?t=" + title + "&apikey=" + omdbUrlApikey,
+						MovieReviewOmdbByT.class)
+				.getBody();
+		summary.setTitle(movieReviewByT.getTitle());
+		summary.setPlot(movieReviewByT.getPlot());
+		summary.setPoster(movieReviewByT.getPoster());
+		summary.setYear(movieReviewByT.getYear());
+		summary.setImdbRating(movieReviewByT.getImdbRating());
+		summary.setImdbVotes(movieReviewByT.getImdbVotes());
+		summary.setLanguage(movieReviewByT.getLanguage());
+		return CompletableFuture.completedFuture(summary);
+	}
+	
+	@Async
+	private CompletableFuture<MovieSummary> setSummaryShortFromNyt(String title, MovieSummary summary) {
+		//logger.info("setSummaryShortFromNyt");
+		MovieReviewNyt movieReviewNyt = restTemplate
+				.getForEntity(nytUrl + "api-key=" + nytUrlApikey + "&query=" + title,
+						MovieReviewNyt.class)
+				.getBody();
+		if(movieReviewNyt.getNum_results() == 0) {
+			summary.setSummary_short("N/A");
+		}
+		Iterator<Results> iterNyt = movieReviewNyt.getResults().iterator();
+		while (iterNyt.hasNext()) {
+			Results result = iterNyt.next();
+			if (result.getDisplay_title().equalsIgnoreCase(title)) {
+				summary.setSummary_short(result.getSummary_short());
+			}
+		}
+		return CompletableFuture.completedFuture(summary);
 	}
 }

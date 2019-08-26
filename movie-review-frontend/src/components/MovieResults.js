@@ -23,9 +23,10 @@ export class MovieResults extends Component {
 				</Row>
 				<Row>
 					<CardDeck>
-						{this.props.movies.map((item, index) => {
-							return <Col key={index}> <MovieItem movie={item} key={index} showButton={true} /></Col>
-						})
+						{
+							this.props.movies.map((item, index) => {
+								return <Col key={index}> <MovieItem movie={item} key={index} showButton={true} /></Col>
+							})
 						}
 					</CardDeck>
 				</Row>
@@ -36,7 +37,7 @@ export class MovieResults extends Component {
 
 function mapStateToProps(state) {
 	return {
-		movies: state.movies
+		movies: state.findMovies.movies
 	}
 }
 

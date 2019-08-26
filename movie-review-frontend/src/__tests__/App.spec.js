@@ -4,14 +4,18 @@ import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import App from '../components/App';
 import {Provider} from 'react-redux';
-import testData from './movietestdata.json';
+import { testData } from '../testData/moviestestdata';
 import { testStore } from '../utils/testUtils';
+
+import thunk from 'redux-thunk';
+import configureMockStore from 'redux-mock-store';
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 configure({ adapter: new Adapter() });
 
-
 const setUp = (initialState={}) => {
-    const store = testStore(initialState);
+    const store = mockStore(initialState);
     const wrapper = mount(
         <Provider store={store}>
             <App />
@@ -22,7 +26,7 @@ const setUp = (initialState={}) => {
 
 describe('>>>App --- Check all child node exists.',()=>{
     let wrapper;
-    const state = { movies: testData.movies };
+    const state = { findMovies: testData };
     it('Search node exists', () => {
         wrapper = setUp(state);
         expect(wrapper.find('Search').exists()).toEqual(true)
@@ -46,7 +50,7 @@ describe('>>>App --- Check all child node exists.',()=>{
 
 describe('>>>App --- Check <h2> <p> and <b> tags.',()=>{
     let wrapper;
-    const state = { movies: testData.movies };
+    const state = { findMovies: testData };
 
       it('Conatins <h2> tag', () => {
         wrapper = setUp(state);

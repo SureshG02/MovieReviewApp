@@ -17,7 +17,7 @@ const mockStore = configureMockStore(middlewares);
 
 describe('>>>Search --- REACT-REDUX (Mount + wrapping in <Provider>', () => {
     let wrapper;
-    const state = testData;
+    const state = { findMovies: testData };
     const store = testStore(state);
 
     beforeEach(() => {
@@ -31,8 +31,8 @@ describe('>>>Search --- REACT-REDUX (Mount + wrapping in <Provider>', () => {
         expect(wrapper.length).toEqual(1)
     });
 
-    it('Expects 1 button rendering on search page', () => {
-        expect(wrapper.find('Button')).toHaveLength(1);
+    it('Expects 8 buttons rendering (1 from Search component and 7 from MoviePagination(2 for Prev and Next and 5 button for number of pages)', () => {
+        expect(wrapper.find('Button')).toHaveLength(8);
     });
 
     it("Expects to run onClick function when submit button is pressed in the DOM", () => {

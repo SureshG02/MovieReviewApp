@@ -40,7 +40,8 @@ export default function findMovies(state = initialState, action) {
                 error: action.error,
                 loading: false,
                 show: true,
-                isFirstLoad: false
+                isFirstLoad: false,
+                pageCounter:1
             }
         case HANDLECLOSE:
             return {

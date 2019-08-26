@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 export class MoviePagination extends Component {
     render() {
         const { pageRange, pageCounter, totalPageNumber, activePage, query, isFirstLoad } = this.props;
-        
+
 		/* Custom pagination logic to show number of pages based on totalPageNumber received from backend. Note here 
 		each click on pagination button makes call to backend.*/
         const pageNumbers = [];
@@ -42,7 +42,7 @@ export class MoviePagination extends Component {
         }
         const renderPagination = pageNumbers.map(number => {
             return (
-                <Button variant="success" type="button" key={number} id={number} hidden={isFirstLoad} active={number === activePage} onClick={(event) => this.props.findMovies(query, event.target.id)}>
+                <Button variant="success" type="button" key={number} id={number} hidden={isFirstLoad} active={number === Number(activePage)} onClick={(event) => this.props.findMovies(query, event.target.id)}>
                     {number}
                 </Button>
             );
@@ -78,6 +78,5 @@ function mapStateToProps(state) {
         activePage: state.findMovies.activePage
     }
 }
-
 
 export default connect(mapStateToProps, { findMovies, nextPageClick, prevPageClick })(MoviePagination);

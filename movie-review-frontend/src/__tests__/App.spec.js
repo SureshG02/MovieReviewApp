@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow, mount, configure  } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
 import App from '../components/App';
 import {Provider} from 'react-redux';
 import { testData } from '../testData/moviestestdata';
@@ -40,11 +39,6 @@ describe('>>>App --- Check all child node exists.',()=>{
       it('MovieItem node exists', () => {
         wrapper = setUp(state);
         expect(wrapper.find('MovieItem').exists()).toEqual(true)
-      });
-
-      it('MovieItem node exists', () => {
-        wrapper = setUp(state);
-        expect(wrapper.contains(<h2>Movies App</h2>)).toEqual(true)
       });
 });
 

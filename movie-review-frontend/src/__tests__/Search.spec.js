@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
 import ConnectedSearch, { Search } from '../components/Search';
 import { Provider } from 'react-redux';
 import { testStore } from '../utils/testUtils';

@@ -1,12 +1,9 @@
 import React from 'react'
 import { shallow, mount, configure  } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
 import MovieItem from '../components/MovieItem';
 import {Provider} from 'react-redux';
-import { testStore } from '../utils/testUtils';
 import { testData } from '../testData/moviestestdata';
-import { movies } from '../actions';
 
 configure({ adapter: new Adapter() });
 

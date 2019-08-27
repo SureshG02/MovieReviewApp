@@ -1,20 +1,21 @@
 import React from 'react'
 import { shallow, mount, configure  } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
 import ConnectedMovieResults,{MovieResults} from '../components/MovieResults';
 import {Provider} from 'react-redux';
-import { testStore } from '../utils/testUtils';
 import { testData } from '../testData/moviestestdata';
-import { movies } from '../actions';
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 
 configure({ adapter: new Adapter() });
 
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 describe('>>>MovieResults --- REACT-REDUX (Shallow + passing the {store} directly)',()=>{
     let wrapper;
     const state = { findMovies: testData };
-    const store = testStore(state);
+    const store = mockStore(state);
 
     beforeEach(()=>{
         wrapper = shallow(
@@ -34,7 +35,7 @@ describe('>>>MovieResults --- REACT-REDUX (Shallow + passing the {store} directl
 describe('>>>H O M E --- REACT-REDUX (Mount + wrapping in <Provider>)',()=>{
     let wrapper;
     const state = { findMovies: testData };
-    const store = testStore(state);
+    const store = mockStore(state);
 
     beforeEach(() => {        
         wrapper = mount(<Provider store={store}>

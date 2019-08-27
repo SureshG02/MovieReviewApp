@@ -17,3 +17,5 @@ Go to movie-review-frontend folder and run npm install. After successful install
 npm test: Run test cases
 
 npm start: Start react UI at 3000 port.
+
+Note: If you do frequent movie search you might get 429 Too many request error since free tier NYT API has API call limit as mentioned here https://developer.nytimes.com/faq#a11

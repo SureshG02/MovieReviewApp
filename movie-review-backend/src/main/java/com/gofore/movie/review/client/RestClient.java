@@ -48,13 +48,13 @@ public class RestClient {
 	 * @return MovieResponse
 	 * @throws InterruptedException
 	 */
-	public MovieResponse generateMovieSummary(String movieSearch, Integer page) throws InterruptedException {
+	public MovieResponse generateMovieSummary(String movieSearch, Integer ...page) throws InterruptedException {
 		List<MovieSummary> summaryList = new ArrayList<MovieSummary>();
 		MovieResponse response = new MovieResponse();
 		String omdbUrlByS = "";
 		try {
-			if (page != null) {
-				omdbUrlByS = omdbUrl + "/?s=" + movieSearch + "&page=" + page.intValue() + "&apikey=" + omdbUrlApikey;
+			if (page.length == 1) {
+				omdbUrlByS = omdbUrl + "/?s=" + movieSearch + "&page=" + page[0] + "&apikey=" + omdbUrlApikey;
 			} else {
 				omdbUrlByS = omdbUrl + "/?s=" + movieSearch + "&apikey=" + omdbUrlApikey;
 			}

@@ -98,7 +98,7 @@ public class RestClientUnitTest {
 				"https://m.media-amazon.com/images/M/MV5BZmUwNGU2ZmItMmRiNC00MjhlLTg5YWUtODMyNzkxODYzMmZlXkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_SX300.jpg",
 				"2005",
 				"After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from corruption.",
-				"8.2", "1,207,358", "English, Urdu, Mandarin", "N/A")));
+				"8.2", "1,207,358", "English, Urdu, Mandarin","tzasdgfj","N/A")));
 		String expected = mapper.writeValueAsString(new MovieResponse(movieSummaryList, 37, null));
 		assertEquals(expected, mapper.writeValueAsString(response));
 	}

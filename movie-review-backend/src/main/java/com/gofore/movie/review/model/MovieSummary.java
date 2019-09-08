@@ -25,6 +25,7 @@ public class MovieSummary {
 	private String imdbRating;
 	private String imdbVotes;
 	private String language;
+	private String imdbId;
 	
 	//summary_short from NYT.
 	private String summary_short;

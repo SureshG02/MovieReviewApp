@@ -33,8 +33,9 @@ public class MovieController {
 	@RequestMapping(value = {"/movie/review/", "/movie/review"}, method = RequestMethod.GET)
 	public ResponseEntity<MovieResponse>  movieReviewList(@RequestParam(name = "title") String movieSearch,
 			@RequestParam(name = "page", required = false) Integer page) throws InterruptedException {
-
+		long start = System.currentTimeMillis();
 		MovieResponse reviewOmdb = restClient.generateMovieSummary(movieSearch, page);
+		System.out.println(System.currentTimeMillis() - start);
 		return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(reviewOmdb);
 	}
 

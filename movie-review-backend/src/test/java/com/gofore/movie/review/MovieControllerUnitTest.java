@@ -44,7 +44,7 @@ public class MovieControllerUnitTest {
 				"https://m.media-amazon.com/images/M/MV5BYThjYzcyYzItNTVjNy00NDk0LTgwMWQtYjMwNmNlNWJhMzMyXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg",
 				"2016",
 				"Fearing that the actions of Superman are left unchecked, Batman takes on the Man of Steel, while the world wrestles with what kind of a hero it really needs.",
-				"6.5", "580,423", "English",
+				"6.5", "580,423", "English","tzasdgfj",
 				"The film, pitting Ben Affleck against Henry Cavill, largely serves as an extended trailer for a slate of coming DC Comics movies like Wonder Woman.");
 		movieSummaryList.add(movieSummary);
 		try {

@@ -1,6 +1,7 @@
 package com.gofore.movie.review.client;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import org.slf4j.Logger;
@@ -60,15 +61,24 @@ public class RestClient {
 
 			MovieReviewOmdbByS movieReviewOmdbByS = restTemplate.getForEntity(omdbUrlByS, MovieReviewOmdbByS.class)
 					.getBody();
+
+//			  HashSet<Search> searchList = new HashSet<Search>(); for(Search search:
+//			  movieReviewOmdbByS.getSearch()) { searchList.add(search); }
+
 			if (movieReviewOmdbByS.isResponse()) {
-				Iterator<Search> iter = movieReviewOmdbByS.getSearch().iterator();
-				while (iter.hasNext()) {
-					Search search = iter.next();
+				movieReviewOmdbByS.getSearch().stream().parallel().forEach((search) -> {
 					MovieSummary summary = new MovieSummary();
 					setMovieReviewsFromOmdb(search.getTitle(), summary);
 					setSummaryShortFromNyt(search.getTitle(), summary);
 					summaryList.add(summary);
-				}
+				});
+
+//				  Iterator<Search> iter = movieReviewOmdbByS.getSearch().iterator(); while
+//				  (iter.hasNext()) { Search search = iter.next(); MovieSummary summary = new
+//				  MovieSummary(); setMovieReviewsFromOmdb(search.getTitle(), summary);
+//				  setSummaryShortFromNyt(search.getTitle(), summary); summaryList.add(summary);
+//				  }
+
 				response.setMovieSummaryList(summaryList);
 				response.setPageNumber(Math.ceil(movieReviewOmdbByS.getTotalResults() / 10.0));
 			} else {
@@ -92,6 +102,7 @@ public class RestClient {
 		summary.setImdbRating(movieReviewByT.getImdbRating());
 		summary.setImdbVotes(movieReviewByT.getImdbVotes());
 		summary.setLanguage(movieReviewByT.getLanguage());
+		summary.setImdbId(movieReviewByT.getImdbID());
 		return summary;
 	}
 

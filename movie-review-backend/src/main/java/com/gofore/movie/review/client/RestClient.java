@@ -72,13 +72,6 @@ public class RestClient {
 					setSummaryShortFromNyt(search.getTitle(), summary);
 					summaryList.add(summary);
 				});
-
-//				  Iterator<Search> iter = movieReviewOmdbByS.getSearch().iterator(); while
-//				  (iter.hasNext()) { Search search = iter.next(); MovieSummary summary = new
-//				  MovieSummary(); setMovieReviewsFromOmdb(search.getTitle(), summary);
-//				  setSummaryShortFromNyt(search.getTitle(), summary); summaryList.add(summary);
-//				  }
-
 				response.setMovieSummaryList(summaryList);
 				response.setPageNumber(Math.ceil(movieReviewOmdbByS.getTotalResults() / 10.0));
 			} else {
